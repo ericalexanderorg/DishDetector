@@ -9,6 +9,8 @@ Initiating a dish investigation when I find dishes in the sink doesn’t work. P
 
 The pi has a simple job. Take a pic every x minutes and look for dishes. If dishes are found in the image then upload the image to a slack channel the entire family monitors.  
 
+![notification](https://github.com/ericalexanderorg/DishDetector/blob/master/docs/images/example_detection.jpg?raw=true)
+
 ## Development notes
 This project had 3 goals: simple, detect dishes, notify
 
