@@ -5,9 +5,11 @@ import copy
 import os
 from slackclient import SlackClient
 
-#Set our threshold, our circle detecting sensitivity
+# Set our threshold, our circle detecting sensitivity
 circle_sensitivity = 40
 
+# Who do we notify through slack?
+slack_to = "#kitchen-sink"
 
 print("Acquiring Image")
 # Note: Larger images require more processing power and have more false positives
@@ -43,7 +45,7 @@ if circles is not None:
         print("Sending slack message")
         slack_token = os.environ["SLACK_BOT_TOKEN"]
         sc = SlackClient(slack_token)
-        sc.api_call('files.upload', channels=to, filename='Dishes_Detected.jpg', file=open('/var/www/html/images/detected.jpg', 'rb'))
+        sc.api_call('files.upload', channels=slack_to, filename='Dishes_Detected.jpg', file=open('/var/www/html/images/detected.jpg', 'rb'))
 
 else: 
         print("No Dishes Found!")
