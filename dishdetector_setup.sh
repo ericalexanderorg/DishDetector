@@ -1,7 +1,8 @@
 ###########################################################################################
 # PREREQUISITES
-# * A raspberry pi with a camera
+# * A raspberry pi with a camera and a buzzer
 #    * I used a pi zero but other versions should work
+# 	 * Any buzzer that works at 5v should be good
 #    * Install raspbian
 #    * Enable the camera and SSH through the raspi-config menu
 # * A slack account with a bot token created for our notifications
@@ -14,8 +15,8 @@
 # Install packages we need through apt
 apt -y install python-opencv numpy apache2 python-pip
 
-# Install the slackclient through pip
-pip install slackclient
+# Install gpiozero through pip
+pip install gpiozero 
 
 # Create our image output directory for troubleshooting purposes
 mkdir /var/www/html/images
@@ -25,4 +26,4 @@ mkdir /opt/dishdetector
 cp dishdetector.py /opt/dishdetector/
 
 # Create a cronjob for our dishdetector that runs every 10 minutes from 9am to 10pm
-crontab -l | { cat; echo "*/10 9-22 * * * SLACK_BOT_TOKEN="replace_with_your_slack_token" python /opt/dishdetector/dishdetector.py"; } | crontab -
+crontab -l | { cat; echo "*/10 9-22 * * * python /opt/dishdetector/dishdetector.py"; } | crontab -
